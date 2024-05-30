@@ -5,11 +5,17 @@ function init() {
   let form = document.querySelector("form");
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    let output = document.querySelector("output");
-    let firstNum = document.querySelector("#first-num").value;
-    let secondNum = document.querySelector("#second-num").value;
-    let operator = document.querySelector("#operator").value;
-    output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+    try {
+      let output = document.querySelector("output");
+      let firstNum = document.querySelector("#first-num").value;
+      let secondNum = document.querySelector("#second-num").value;
+      let operator = document.querySelector("#operator").value;
+      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+    } catch (err) {
+      console.log("An error occurred while processing the calculation");
+    } finally {
+      console.log("Operation completed");
+    }
   });
 
   let errorBtns = Array.from(document.querySelectorAll("#error-btns > button"));
@@ -42,14 +48,6 @@ function init() {
     if (buttonCallbacks[button.innerText]) {
       button.addEventListener("click", buttonCallbacks[button.innerText]);
     }
-  }
-
-  try {
-    console.log(document.querySelector("fakebutton").innerText);
-  } catch (err) {
-    console.log("Could not find the button", err);
-  } finally {
-    console.log("Finished processing fakebutton request");
   }
 }
 
